@@ -44,15 +44,21 @@ function optionChanged(val) {
         var sel_val = sel.options[sel.selectedIndex].value
         console.log(sel_val)
 
-        console.log("This is the metadata gain")
-        console.log(metadata)
-
-        console.log ("val", val)
-
         var metadataFiltered = metadata.filter(function(data) {
-            return String(data.id) === val;
+            return String(data.id) === sel_val;
         });
         console.log(metadataFiltered)
+
+        d3.select("#sample-metadata")
+        .selectAll("h3")
+        .data(metadataFiltered)
+        .enter() // creates placeholder for new data
+        .append("h5") // appends a div to placeholder
+        .html(function(d) {
+            return `ID: ${d.id}<br>
+            Ethnicity: ${d.ethnicity}<br>
+            `;
+        }); // sets the html in the div to an image tag with the link
 
     });
 

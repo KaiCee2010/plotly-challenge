@@ -25,8 +25,9 @@ function optionChanged(val) {
         var names = data.names
         var metadata = data.metadata
         var samples = data.samples
+        // var samplesOTU = data.samples.otu_ids
 
-        console.log(names)
+        console.log(typeof names)
         console.log(metadata)
         console.log(samples)
 
@@ -71,6 +72,28 @@ function optionChanged(val) {
             return data.id === sel_val;
         });
         console.log(samplesFiltered)
+
+        // var samplesOtuIds =  samplesFiltered.map(row => row.otu_ids);
+        var samplesOtuIds =  samplesFiltered.map(function(d){
+            return d.otu_ids
+        });
+        console.log ("all sample otu", samplesOtuIds)
+
+        var samplesOtuIds10 = samplesOtuIds[0].filter(function(d, i){
+            return i<10
+        });
+        console.log("First 10", samplesOtuIds10)
+
+        var samplesSamVals =  samplesFiltered.map(function(d){
+            return d.sample_values
+        });
+        console.log ("all sample otu", samplesSamVals)
+
+        var samplesSamVals10 = samplesSamVals[0].filter(function(d, i){
+            return i<10
+        });
+        console.log("First 10", samplesSamVals10)
+
 
     });
 

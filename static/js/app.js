@@ -16,7 +16,7 @@ console.log(marvelHeroes);
 
 
 function optionChanged(val) {
-    d3.selectAll("#sample-metadata").select("h5").remove();
+    d3.selectAll("#sample-metadata").select("h6").remove();
     
     console.log(`this is an id: ${val}`)
     d3.json(url).then(function(data) {
@@ -53,18 +53,18 @@ function optionChanged(val) {
         console.log(metadataFiltered)
 
         d3.select("#sample-metadata")
-        .selectAll("h5")
+        .selectAll("h6")
         .data(metadataFiltered)
         .enter() // creates placeholder for new data
-        .append("h5") // appends a div to placeholder
+        .append("h6") // appends a div to placeholder
         .html(function(d) {
-            return `ID: ${d.id}<br>
-            Ethnicity: ${d.ethnicity}<br>
-            Gender: ${d.gender}<br>
-            Age: ${d.age}<br>
-            Location: ${d.location}<br>
-            Bbtype: ${d.bbtype}<br>
-            Wfreq:${d.wfreq}<br>
+            return `ID: ${d.id}<br><br>
+            Ethnicity: ${d.ethnicity}<br><br>
+            Gender: ${d.gender}<br><br>
+            Age: ${d.age}<br><br>
+            Location: ${d.location}<br><br>
+            Bbtype: ${d.bbtype}<br><br>
+            Wfreq:${d.wfreq}<br><br>
             `;
         }); // sets the html in the div to an image tag with the link
 
@@ -84,15 +84,60 @@ function optionChanged(val) {
         });
         console.log("First 10", samplesOtuIds10)
 
+        var samplesOtuIds10_strings = samplesOtuIds10.map(String)
+        console.log("Firt 10 String", samplesOtuIds10_strings)
+
         var samplesSamVals =  samplesFiltered.map(function(d){
             return d.sample_values
         });
-        console.log ("all sample otu", samplesSamVals)
+        console.log ("all sample values", samplesSamVals)
 
         var samplesSamVals10 = samplesSamVals[0].filter(function(d, i){
             return i<10
         });
         console.log("First 10", samplesSamVals10)
+
+        var samplesOtuLabels =  samplesFiltered.map(function(d){
+            return d.otu_labels
+        });
+        console.log ("all sample values", samplesOtuLabels)
+
+        var samplesOtuLabels10 = samplesOtuLabels[0].filter(function(d, i){
+            return i<10
+        });
+        console.log("First 10", samplesOtuLabels10)
+
+        var trace1 = {
+            x: samplesSamVals10,
+            y: samplesOtuIds10_strings,
+            name: samplesOtuLabels10,
+            type: "bar",
+            orientation: "h",
+            text: samplesOtuLabels10
+            
+          };
+
+        var plotData = [trace1]
+
+        var layout = {
+            title: `Test Subject ID: ${sel_val} `,
+            xaxis: {
+                title:"Sample Values"
+                
+            },
+            yaxis: {
+                title: "OTU IDs",
+                autorange:'reversed',
+                type: "category"
+
+              
+            }
+          };
+        
+        Plotly.newPlot("bar", plotData, layout)
+
+        
+
 
 
     });

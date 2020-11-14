@@ -136,7 +136,31 @@ function optionChanged(val) {
         
         Plotly.newPlot("bar", plotData, layout)
 
-        
+        var trace2 = {
+            x: samplesOtuIds10_strings,
+            y: samplesSamVals10,
+            text: samplesOtuLabels10,
+            mode: 'markers',
+            marker: {
+                color: samplesOtuIds10,
+                size: samplesSamVals10 
+            }
+        };
+            
+        var plotData2 = [trace2]
+
+        var layout2 = {
+            title: `Bubble Sample Values for ${sel_val} `,
+            xaxis: {
+                title:"OTU ID"
+                
+            },
+            yaxis: {
+                title: "Sample Values",             
+            }
+        };
+
+        Plotly.newPlot("bubble", plotData2, layout2)
 
 
 

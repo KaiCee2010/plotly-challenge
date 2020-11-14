@@ -16,6 +16,8 @@ console.log(marvelHeroes);
 
 
 function optionChanged(val) {
+    d3.selectAll("#sample-metadata").select("h5").remove();
+    
     console.log(`this is an id: ${val}`)
     d3.json(url).then(function(data) {
         console.log(data);
@@ -50,13 +52,18 @@ function optionChanged(val) {
         console.log(metadataFiltered)
 
         d3.select("#sample-metadata")
-        .selectAll("h3")
+        .selectAll("h5")
         .data(metadataFiltered)
         .enter() // creates placeholder for new data
         .append("h5") // appends a div to placeholder
         .html(function(d) {
             return `ID: ${d.id}<br>
             Ethnicity: ${d.ethnicity}<br>
+            Gender: ${d.gender}<br>
+            Age: ${d.age}<br>
+            Location: ${d.location}<br>
+            Bbtype: ${d.bbtype}<br>
+            Wfreq:${d.wfreq}<br>
             `;
         }); // sets the html in the div to an image tag with the link
 

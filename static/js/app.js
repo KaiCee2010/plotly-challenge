@@ -148,8 +148,43 @@ function optionChanged(val) {
         Plotly.newPlot("bubble", plotData2, layout2)
 
         
-        var metadataFilteredWfreq = metadataFiltered.wfreq
+        var metadataFilteredWfreq = metadataFiltered[0].wfreq
         console.log(metadataFilteredWfreq)
+
+        // var trace3 = [
+        //     {
+        //       domain: { x: [0, 1], y: [0, 1] },
+        //       value: metadataFilteredWfreq,
+        //       title: { text: "Scrubs per Week" },
+        //       type: "indicator",
+        //       mode: "gauge+number",
+        //       gauge: {
+        //         axis: { range: [null, 9] },
+        //         steps: [
+        //           { range: [0, 4], color: "lightgray" },
+        //           { range: [4, 9], color: "gray" }
+        //         ]
+        //         }
+        //       }
+        //   ];
+
+        var plotData3 = [
+            {
+                domain: { x: [0, 1], y: [0, 1] },
+                value: 350,
+                title: { text: "Speed" },
+                type: "indicator",
+                mode: "gauge+number"
+            }
+        ];
+
+        var layout3 = { 
+            width: 600, 
+            height: 450, 
+            margin: { t: 0, b: 0
+        }};
+
+        Plotly.newPlot("gauge", plotData3, layout3)
 
     });
 

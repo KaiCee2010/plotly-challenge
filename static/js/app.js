@@ -1,20 +1,5 @@
 var url = 'samples.json'
 
-
-var heroes = [{
-    name: "Batman", franchise: "DC"},
-	{name: "Ironman", franchise: "Marvel"},
-	{name: "Thor", franchise: "Marvel"},
-	{name: "Superman", franchise: "DC"}
-];
-
-var marvelHeroes =  heroes.filter(function(hero) {
-	return hero.franchise === "Marvel";
-});
-
-console.log(marvelHeroes);
-
-
 function optionChanged(val) {
     d3.selectAll("#sample-metadata").select("h6").remove();
     
@@ -50,7 +35,7 @@ function optionChanged(val) {
         var metadataFiltered = metadata.filter(function(data) {
             return String(data.id) === sel_val;
         });
-        console.log(metadataFiltered)
+        console.log("Metadata filtered", metadataFiltered)
 
         d3.select("#sample-metadata")
         .selectAll("h6")
@@ -162,7 +147,9 @@ function optionChanged(val) {
 
         Plotly.newPlot("bubble", plotData2, layout2)
 
-
+        
+        var metadataFilteredWfreq = metadataFiltered.wfreq
+        console.log(metadataFilteredWfreq)
 
     });
 

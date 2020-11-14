@@ -67,6 +67,11 @@ function optionChanged(val) {
             `;
         }); // sets the html in the div to an image tag with the link
 
+        var samplesFiltered = samples.filter(function(data) {
+            return data.id === sel_val;
+        });
+        console.log(samplesFiltered)
+
     });
 
 }

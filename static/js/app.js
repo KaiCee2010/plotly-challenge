@@ -1,14 +1,22 @@
 var url = 'samples.json'
 
 
-// function optionChanged(id){
-//     console.log (id)
-// }
+var heroes = [{
+    name: "Batman", franchise: "DC"},
+	{name: "Ironman", franchise: "Marvel"},
+	{name: "Thor", franchise: "Marvel"},
+	{name: "Superman", franchise: "DC"}
+];
+
+var marvelHeroes =  heroes.filter(function(hero) {
+	return hero.franchise === "Marvel";
+});
+
+console.log(marvelHeroes);
 
 
-
-function optionChanged(id) {
-    console.log(`this is an id: ${id}`)
+function optionChanged(val) {
+    console.log(`this is an id: ${val}`)
     d3.json(url).then(function(data) {
         console.log(data);
         
@@ -20,6 +28,8 @@ function optionChanged(id) {
         console.log(metadata)
         console.log(samples)
 
+        // var sel = d3.select('#selDataset').node().value
+        // console.log("Dropdown value", sel)
 
         d3.select("#selDataset")
         .selectAll("option")
@@ -30,12 +40,24 @@ function optionChanged(id) {
             return `${d}`;
         }); // sets the html in the div to an image tag with the link
 
+        var sel = document.getElementById('selDataset');
+        var sel_val = sel.options[sel.selectedIndex].value
+        console.log(sel_val)
 
+        console.log("This is the metadata gain")
+        console.log(metadata)
 
+        console.log ("val", val)
+
+        var metadataFiltered = metadata.filter(function(data) {
+            return String(data.id) === val;
+        });
+        console.log(metadataFiltered)
 
     });
 
 }
+
 
 optionChanged()
     

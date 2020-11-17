@@ -122,13 +122,13 @@ function optionChanged(val) {
         Plotly.newPlot("bar", plotData, layout)
 
         var trace2 = {
-            x: samplesOtuIds10_strings,
-            y: samplesSamVals10,
-            text: samplesOtuLabels10,
+            x: samplesOtuIds[0],
+            y: samplesSamVals[0],
+            text: samplesOtuLabels[0],
             mode: 'markers',
             marker: {
-                color: samplesOtuIds10,
-                size: samplesSamVals10 
+                color: samplesOtuIds[0],
+                size: samplesSamVals[0] 
             }
         };
             
@@ -141,7 +141,7 @@ function optionChanged(val) {
                 
             },
             yaxis: {
-                title: "Sample Values",             
+                title: "Sample Values"      
             }
         };
 
@@ -156,11 +156,16 @@ function optionChanged(val) {
         var level = metadataFilteredWfreq;
 
         // Trig to calc meter point
-        var degrees = 9 - level,
-            radius = .5;
-        var radians = degrees * Math.PI / 9;
-        var x = radius * Math.cos(radians);
+        var degrees = level*20, radius = .6;
+        var radians = degrees * Math.PI / 180;
+        var x = -1 * radius * Math.cos(radians);
         var y = radius * Math.sin(radians);
+
+        // var degrees = 9 - level,
+        //     radius = .5;
+        // var radians = degrees * Math.PI / 9;
+        // var x = radius * Math.cos(radians);
+        // var y = radius * Math.sin(radians);
 
         // Path: may have to change to create a better triangle
         var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
@@ -173,17 +178,17 @@ function optionChanged(val) {
         var plotData3 = [{
             type: 'scatter',
             x: [0], y:[0],
-                marker: {size: 28, color:'#901713'},
+                marker: {size: 20, color:'#901713'},
                 showlegend: false,
-                name: 'speed',
+                name: 'Wash Freq',
                 text: level,
-                hoverinfo: 'text+name'},
-            { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
+                hoverinfo: 'name+text'},
+            { values: [180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180 ],
             rotation: 90,
             text: ['8-9','7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
             textinfo: 'text',
             textposition:'inside',	  
-            marker: {colors:["#FEFDE2", "#F1F4D4", "#E4ECC7", "#D7E4B9", "#CADCAC", "#BDD49E", "#B0CC91", "#A3C483", "#97BC76", "rgba(255, 255, 255, 0)"]},
+            marker: {colors:["#FEFDE2", "#F1F4D4", "#E4ECC7", "#D7E4B9", "#CADCAC", "#BDD49E", "#B0CC91", "#A3C483", "#97BC76", "#FFFFFF"]},
             labels: ['8-9','7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
             hoverinfo: 'label',
             hole: .5,

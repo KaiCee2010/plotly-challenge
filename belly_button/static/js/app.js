@@ -147,25 +147,40 @@ function optionChanged(val) {
 
         Plotly.newPlot("bubble", plotData2, layout2)
 
-        
         var metadataFilteredWfreq = metadataFiltered[0].wfreq
         console.log(metadataFilteredWfreq)
-
+  
+         
         
-        // Enter a speed between 0 and 180
-        var level = metadataFilteredWfreq;
 
         // Trig to calc meter point
-        var degrees = level*20, radius = .6;
+
+        var weight = 0;
+        if (metadataFilteredWfreq == 1){
+            weight = 10
+        } else if (metadataFilteredWfreq == 2){
+            weight = 15
+        } else if (metadataFilteredWfreq == 3){
+            weight = 12;
+        } else if (metadataFilteredWfreq == 4){
+            weight = 5;
+        } else if (metadataFilteredWfreq == 5){
+            weight = -5;
+        } else if (metadataFilteredWfreq == 6){
+            weight = -10;
+        } else if (metadataFilteredWfreq == 7){
+            weight = -15;
+        } else{
+            weight = 0
+        }
+
+        var degrees = (20 * metadataFilteredWfreq + weight)
+	        radius = .5;
         var radians = degrees * Math.PI / 180;
         var x = -1 * radius * Math.cos(radians);
         var y = radius * Math.sin(radians);
 
-        // var degrees = 9 - level,
-        //     radius = .5;
-        // var radians = degrees * Math.PI / 9;
-        // var x = radius * Math.cos(radians);
-        // var y = radius * Math.sin(radians);
+       
 
         // Path: may have to change to create a better triangle
         var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
@@ -181,15 +196,16 @@ function optionChanged(val) {
                 marker: {size: 20, color:'#901713'},
                 showlegend: false,
                 name: 'Wash Freq',
-                text: level,
+                text: metadataFilteredWfreq,
                 hoverinfo: 'name+text'},
             { values: [180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180/9, 180 ],
             rotation: 90,
-            text: ['8-9','7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+            text: ['0-1','1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', ''],
+            direction: 'clockwise',
             textinfo: 'text',
             textposition:'inside',	  
             marker: {colors:["#FEFDE2", "#F1F4D4", "#E4ECC7", "#D7E4B9", "#CADCAC", "#BDD49E", "#B0CC91", "#A3C483", "#97BC76", "#FFFFFF"]},
-            labels: ['8-9','7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ''],
+            labels: ['0-1','1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', ''],
             hoverinfo: 'label',
             hole: .5,
             type: 'pie',
@@ -215,6 +231,8 @@ function optionChanged(val) {
         };
 
         Plotly.newPlot("gauge", plotData3, layout3)
+
+
 
     });
 

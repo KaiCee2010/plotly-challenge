@@ -7,23 +7,23 @@ function optionChanged(val) {
     d3.json(url).then(function(data) {
         console.log(data);
         
+
+        //create variable to gather data
         var names = data.names
         var metadata = data.metadata
         var samples = data.samples
-        // var samplesOTU = data.samples.otu_ids
-
-        console.log(typeof names)
+        
+        //display the various data sets
+        console.log(names)
         console.log(metadata)
         console.log(samples)
 
-        // var sel = d3.select('#selDataset').node().value
-        // console.log("Dropdown value", sel)
-
+        //Add values to the select dataset dropdown
         d3.select("#selDataset")
         .selectAll("option")
         .data(names)
-        .enter() // creates placeholder for new data
-        .append("option") // appends a div to placeholder
+        .enter()
+        .append("option")
         .html(function(d) {
             return `${d}`;
         }); // sets the html in the div to an image tag with the link

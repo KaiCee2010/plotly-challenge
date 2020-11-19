@@ -26,8 +26,9 @@ function optionChanged(val) {
         .append("option")
         .html(function(d) {
             return `${d}`;
-        }); // sets the html in the div to an image tag with the link
+        });
 
+        //grab the value of the selDataset value
         var sel = document.getElementById('selDataset');
         var sel_val = sel.options[sel.selectedIndex].value
         console.log(sel_val)
@@ -37,11 +38,13 @@ function optionChanged(val) {
         });
         console.log("Metadata filtered", metadataFiltered)
 
+
+        //Add values to the sample metadata box
         d3.select("#sample-metadata")
         .selectAll("h6")
         .data(metadataFiltered)
-        .enter() // creates placeholder for new data
-        .append("h6") // appends a div to placeholder
+        .enter() 
+        .append("h6") 
         .html(function(d) {
             return `ID: ${d.id}<br><br>
             Ethnicity: ${d.ethnicity}<br><br>
@@ -51,47 +54,56 @@ function optionChanged(val) {
             Bbtype: ${d.bbtype}<br><br>
             Wfreq:${d.wfreq}<br><br>
             `;
-        }); // sets the html in the div to an image tag with the link
+        }); 
 
+        //Filter all the datasets by the id 
         var samplesFiltered = samples.filter(function(data) {
             return data.id === sel_val;
         });
         console.log(samplesFiltered)
 
-        // var samplesOtuIds =  samplesFiltered.map(row => row.otu_ids);
+        //grab all the otu_ids
         var samplesOtuIds =  samplesFiltered.map(function(d){
             return d.otu_ids
         });
         console.log ("all sample otu", samplesOtuIds)
 
+        //grab the first 10 values of OTU ids
         var samplesOtuIds10 = samplesOtuIds[0].filter(function(d, i){
             return i<10
         });
         console.log("First 10", samplesOtuIds10)
 
+        //convert the OTU ids to strings
         var samplesOtuIds10_strings = samplesOtuIds10.map(String)
         console.log("Firt 10 String", samplesOtuIds10_strings)
 
+        //grab all the sample values
         var samplesSamVals =  samplesFiltered.map(function(d){
             return d.sample_values
         });
         console.log ("all sample values", samplesSamVals)
 
+        //grab the first 10 sample values
         var samplesSamVals10 = samplesSamVals[0].filter(function(d, i){
             return i<10
         });
         console.log("First 10", samplesSamVals10)
 
+        //grab all the otu labels
         var samplesOtuLabels =  samplesFiltered.map(function(d){
             return d.otu_labels
         });
         console.log ("all sample values", samplesOtuLabels)
 
+        //grab the first 10 otu labels
         var samplesOtuLabels10 = samplesOtuLabels[0].filter(function(d, i){
             return i<10
         });
         console.log("First 10", samplesOtuLabels10)
 
+
+        //create a bar graph of the sample values
         var trace1 = {
             x: samplesSamVals10,
             y: samplesOtuIds10_strings,
@@ -121,6 +133,10 @@ function optionChanged(val) {
         
         Plotly.newPlot("bar", plotData, layout)
 
+
+        //create a bubble chart of all of the sample values
+        //colored by otu_ids
+        //size by sample values
         var trace2 = {
             x: samplesOtuIds[0],
             y: samplesSamVals[0],
@@ -149,12 +165,10 @@ function optionChanged(val) {
 
         var metadataFilteredWfreq = metadataFiltered[0].wfreq
         console.log(metadataFilteredWfreq)
-  
-         
-        
 
-        // Trig to calc meter point
 
+       //All of this code was taken from other sources
+       //Created just to see if it would work
         var weight = 0;
         if (metadataFilteredWfreq == 1){
             weight = 10

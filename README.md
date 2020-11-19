@@ -2,6 +2,9 @@
 
 This homework assigned used data from  to create a web site with plots and data using data from [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/).
 
+## Belly Button Biodiversity Dashboard
+The functioning web page can be found here: [Belly Button Biodiversity Dashboard](https://kaicee2010.github.io/plotly-challenge/belly_button/index.html)
+
 ## Summary
 D3 and/or Plotly were used to create the data or graphs.  A dropdown list filters the dataset and updates all of the graphs and demographic information on the web page.
 

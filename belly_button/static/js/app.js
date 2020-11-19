@@ -103,7 +103,7 @@ function optionChanged(val) {
         console.log("First 10", samplesOtuLabels10)
 
 
-        //create a bar graph of the sample values
+        //create a bar graph of the top 10 OTUs
         var trace1 = {
             x: samplesSamVals10,
             y: samplesOtuIds10_strings,

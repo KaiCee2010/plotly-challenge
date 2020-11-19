@@ -47,6 +47,7 @@ The bonus Weekly Washing Frequency Gauge was created using the following code:
 - [Code1](https://code.tutsplus.com/tutorials/create-interactive-charts-using-plotlyjs-pie-and-gauge-charts--cms-29216)
 - [Code2](https://codepen.io/Shokeen/pen/prNzpN)
 - [Code3](https://codepen.io/plotly/pen/rxeZME)
+
 Bonus credit is not expected.  
 
 
